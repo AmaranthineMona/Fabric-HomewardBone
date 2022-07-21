@@ -1,25 +1,19 @@
 package net.fabricmc.amar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-public class HomewardBone implements ModInitializer {
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
+public class Homeward implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
 
-	public static final Block HOME_ANCHOR = new Block(FabricBlockSettings.of(Material.STONE).strength(4.0f).requiresTool());
+	public static final HomeAnchor HOME_ANCHOR = new HomeAnchor();
 
 	@Override
 	public void onInitialize() {
