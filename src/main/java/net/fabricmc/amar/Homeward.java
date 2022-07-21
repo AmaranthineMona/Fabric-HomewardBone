@@ -20,5 +20,7 @@ public class Homeward implements ModInitializer {
 		Registry.register(Registry.BLOCK, new Identifier("homeward", "home_anchor"), HOME_ANCHOR);
 		Registry.register(Registry.ITEM, new Identifier("homeward", "home_anchor"),
 				new BlockItem(HOME_ANCHOR, new FabricItemSettings().group(ItemGroup.MISC)));
+
+		ModEventsRegister.registerEvents();
 	}
 }

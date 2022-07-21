@@ -16,10 +16,6 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
-	maven {
-		name = 'Ladysnake Mods'
-		url = 'https://ladysnake.jfrog.io/artifactory/mods'
-	}
 }
 
 dependencies {
@@ -30,11 +26,6 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-	// Replace modImplementation with modApi if you expose components in your own API
-    modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:5.0.1"
-    // Includes Cardinal Components API as a Jar-in-Jar dependency (optional but recommended)
-    include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:5.0.1"
 }
 
 processResources {

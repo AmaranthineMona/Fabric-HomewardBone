@@ -26,7 +26,7 @@ public class HomeAnchor extends Block {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
             BlockHitResult hit) {
         if (!world.isClient){
-            ((PlayerEntityExt) player).UpdateAnchor(pos);
+            ((EntityExt) player).UpdateAnchor(pos);
 
             player.sendMessage(Text.of("awwoooo"), false);
         }
@@ -37,7 +37,7 @@ public class HomeAnchor extends Block {
     @Override
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
         if (!world.isClient){
-            var heck = ((PlayerEntityExt) player).GetHomeAnchorPos();
+            var heck = ((EntityExt) player).GetHomeAnchorPos();
 
             if (heck != null){
 
