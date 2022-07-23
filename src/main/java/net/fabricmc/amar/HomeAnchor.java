@@ -38,7 +38,7 @@ public class HomeAnchor extends Block {
                 ((EntityExt) player).UpdateAnchor(pos);
                 boundPlayer = player;
             } else if (!this.boundPlayer.equals(player)) {
-                player.sendMessage(Text.of("This home anchor is already in use"), true);
+                player.sendMessage(Text.of("Already bound to another player"), true);
                 return ActionResult.FAIL;
             }
         }

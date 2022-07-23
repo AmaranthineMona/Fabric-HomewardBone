@@ -42,12 +42,12 @@ public class HomewardBone extends Item {
 
         if (!this.isInOverworld(world)) {
             player.stopUsingItem();
-            player.sendMessage(Text.of("Home anchor is in another dimension."), true);
+            player.sendMessage(Text.of("Home anchor is in another dimension"), true);
 
             return TypedActionResult.fail(player.getStackInHand(hand));
         } else if (!this.IsHomeAnchorAvailable(world, player)) {
             player.stopUsingItem();
-            player.sendMessage(Text.of("Home anchor was broken or blocked."), true);
+            player.sendMessage(Text.of("Home anchor was broken or blocked"), true);
 
             return TypedActionResult.fail(player.getStackInHand(hand));
         } else {
