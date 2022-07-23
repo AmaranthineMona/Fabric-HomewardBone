@@ -7,6 +7,9 @@ import net.minecraft.block.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -28,6 +31,10 @@ public class HomeAnchor extends Block {
 
     public PlayerEntity getBoundPlayer() {
         return this.boundPlayer;
+    }
+
+    public void onTeleport(BlockPos pos, World world){
+        world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.AMBIENT, 2.0f, 0.75f, true);
     }
 
     @Override

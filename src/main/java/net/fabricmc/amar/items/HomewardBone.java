@@ -80,9 +80,11 @@ public class HomewardBone extends Item {
     private void TeleportPlayer(World world, LivingEntity player, Hand hand) {
         if (!world.isClient) {
             var anchorPos = ((EntityExt) player).GetHomeAnchorPos();
+            var homeAnchor = (HomeAnchor) world.getBlockState(anchorPos).getBlock();
             ((ServerPlayerEntity) player).networkHandler.requestTeleport(anchorPos.getX(), anchorPos.getY(),
                     anchorPos.getZ(), player.getYaw(), player.getPitch());
 
+            homeAnchor.onTeleport(anchorPos, world);
             player.getStackInHand(hand).decrement(1);
         }
     }
