@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      " A ",
+      "CBC",
+      " A "
+    ],
+    "key": {
+      "A": {
+        "item": "minecraft:emerald"
+      },
+      "B": {
+        "item": "minecraft:ender_pearl"
+      },
+      "C": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "result": {
+      "item": "homeward:bonfire_charm",
+      "count": 1
+    }
+  }

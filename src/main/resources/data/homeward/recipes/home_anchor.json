@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "A",
+      "B",
+      "C"
+    ],
+    "key": {
+      "A": {
+        "item": "homeward:bonfire_charm"
+      },
+      "B": {
+        "item": "minecraft:iron_sword"
+      },
+      "C": {
+        "item": "minecraft:campfire"
+      }
+    },
+    "result": {
+      "item": "homeward:home_anchor",
+      "count": 1
+    }
+  }
