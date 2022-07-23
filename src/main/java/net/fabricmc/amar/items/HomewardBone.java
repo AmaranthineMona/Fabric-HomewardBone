@@ -101,6 +101,10 @@ public class HomewardBone extends Item {
 
     @Override
     public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks) {
+        if (remainingUseTicks == this.getMaxUseTime(stack) - 2) {
+            player.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, 1.0f, 1.0f);
+        }
+
         if (remainingUseTicks <= this.getMaxUseTime(stack) - 16) {
             player.stopUsingItem();
             TeleportPlayer(world, player, player.getActiveHand());
