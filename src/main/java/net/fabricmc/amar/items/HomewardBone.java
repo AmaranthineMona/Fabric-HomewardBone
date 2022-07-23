@@ -36,7 +36,7 @@ public class HomewardBone extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         if (((EntityExt) player).GetHomeAnchorPos() == null) {
-            //This prevents non-player use events from being processed
+            // This prevents non-player use events from being processed
             return TypedActionResult.fail(player.getStackInHand(hand));
         }
 
@@ -61,14 +61,20 @@ public class HomewardBone extends Item {
         return world.getRegistryKey().getValue().equals(DimensionType.OVERWORLD_ID);
     }
 
-    private boolean IsHomeAnchorAvailable(World world, LivingEntity player) {
+    private boolean IsHomeAnchorAvailable(World world, PlayerEntity player) {
         var anchorPos = ((EntityExt) player).GetHomeAnchorPos();
         if (anchorPos == null)
             return false;
 
         var block = world.getBlockState(anchorPos).getBlock();
 
-        return block instanceof HomeAnchor;
+        if (block instanceof HomeAnchor) {
+            var homeAnchor = (HomeAnchor) block;
+            var boundPlayer = homeAnchor.getBoundPlayer();
+            return boundPlayer != null ? boundPlayer.equals(player) : false;
+        } else {
+            return false;
+        }
     }
 
     private void TeleportPlayer(World world, LivingEntity player, Hand hand) {

@@ -16,6 +16,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
 public class HomeAnchor extends Block {
+    private PlayerEntity boundPlayer;
+
     public HomeAnchor(Settings settings) {
         super(settings);
     }
@@ -24,11 +26,21 @@ public class HomeAnchor extends Block {
         super(FabricBlockSettings.of(Material.STONE).strength(1.0f).requiresTool());
     }
 
+    public PlayerEntity getBoundPlayer() {
+        return this.boundPlayer;
+    }
+
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
             BlockHitResult hit) {
         if (!world.isClient) {
-            ((EntityExt) player).UpdateAnchor(pos);
+            if (this.boundPlayer == null) {
+                ((EntityExt) player).UpdateAnchor(pos);
+                boundPlayer = player;
+            } else if (!this.boundPlayer.equals(player)) {
+                player.sendMessage(Text.of("This home anchor is already in use"), true);
+                return ActionResult.FAIL;
+            }
         }
 
         return ActionResult.SUCCESS;
