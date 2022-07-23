@@ -35,30 +35,49 @@ public class HomewardBone extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        player.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, 1.0f, 1.0f);
+        if (((EntityExt) player).GetHomeAnchorPos() == null) {
+            //This prevents non-player use events from being processed
+            return TypedActionResult.fail(player.getStackInHand(hand));
+        }
 
-        return super.use(world, player, hand);
+        if (!this.isInOverworld(world)) {
+            player.stopUsingItem();
+            player.sendMessage(Text.of("Home anchor is in another dimension."), true);
+
+            return TypedActionResult.fail(player.getStackInHand(hand));
+        } else if (!this.IsHomeAnchorAvailable(world, player)) {
+            player.stopUsingItem();
+            player.sendMessage(Text.of("Home anchor was broken or blocked."), true);
+
+            return TypedActionResult.fail(player.getStackInHand(hand));
+        } else {
+            player.playSound(SoundEvents.BLOCK_FIRE_AMBIENT, 1.0f, 1.0f);
+
+            return super.use(world, player, hand);
+        }
+    }
+
+    private boolean isInOverworld(World world) {
+        return world.getRegistryKey().getValue().equals(DimensionType.OVERWORLD_ID);
+    }
+
+    private boolean IsHomeAnchorAvailable(World world, LivingEntity player) {
+        var anchorPos = ((EntityExt) player).GetHomeAnchorPos();
+        if (anchorPos == null)
+            return false;
+
+        var block = world.getBlockState(anchorPos).getBlock();
+
+        return block instanceof HomeAnchor;
     }
 
     private void TeleportPlayer(World world, LivingEntity player, Hand hand) {
         if (!world.isClient) {
             var anchorPos = ((EntityExt) player).GetHomeAnchorPos();
-            var block = world.getBlockState(anchorPos).getBlock();
+            ((ServerPlayerEntity) player).networkHandler.requestTeleport(anchorPos.getX(), anchorPos.getY(),
+                    anchorPos.getZ(), player.getYaw(), player.getPitch());
 
-            if (world.getRegistryKey().getValue().equals(DimensionType.OVERWORLD_ID)) {
-                if (block instanceof HomeAnchor) {
-
-                    ((ServerPlayerEntity) player).networkHandler.requestTeleport(anchorPos.getX(), anchorPos.getY(),
-                            anchorPos.getZ(), player.getYaw(), player.getPitch());
-
-                    player.getStackInHand(hand).decrement(1);
-                } else {
-                    player.sendSystemMessage(Text.of("Home anchor was broken or blocked."), player.getUuid());
-                }
-            } else {
-                player.sendSystemMessage(Text.of("Home anchor is in another dimension."), player.getUuid());
-            }
-
+            player.getStackInHand(hand).decrement(1);
         }
     }
 
@@ -74,10 +93,23 @@ public class HomewardBone extends Item {
 
     @Override
     public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks) {
-        if (remainingUseTicks == 1) {
+        if (remainingUseTicks <= this.getMaxUseTime(stack) - 16) {
+            player.stopUsingItem();
             TeleportPlayer(world, player, player.getActiveHand());
 
             player.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 2.0f, 0.75f);
         }
+    }
+
+    @Override
+    public int getMaxUseTime(ItemStack stack) {
+        // Set sufficiently high so that the food animation never finishes, allowing us
+        // to override behavior
+        return 300;
+    }
+
+    @Override
+    public boolean isUsedOnRelease(ItemStack stack) {
+        return false;
     }
 }
