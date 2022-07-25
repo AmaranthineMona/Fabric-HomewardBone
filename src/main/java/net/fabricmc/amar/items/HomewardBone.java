@@ -68,13 +68,7 @@ public class HomewardBone extends Item {
 
         var block = world.getBlockState(anchorPos).getBlock();
 
-        if (block instanceof HomeAnchor) {
-            var homeAnchor = (HomeAnchor) block;
-            var boundPlayer = homeAnchor.getBoundPlayer();
-            return boundPlayer != null ? boundPlayer.equals(player) : false;
-        } else {
-            return false;
-        }
+        return block instanceof HomeAnchor;
     }
 
     private void TeleportPlayer(World world, LivingEntity player, Hand hand) {
@@ -91,7 +85,7 @@ public class HomewardBone extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.of("Use to return back to\n your attuned home anchor."));
+        tooltip.add(Text.of("Use to return back to your attuned home anchor."));
     }
 
     @Override

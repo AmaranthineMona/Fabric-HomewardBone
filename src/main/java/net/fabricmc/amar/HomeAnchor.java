@@ -8,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -19,8 +18,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
 public class HomeAnchor extends Block {
-    private PlayerEntity boundPlayer;
-
     public HomeAnchor(Settings settings) {
         super(settings);
     }
@@ -29,25 +26,16 @@ public class HomeAnchor extends Block {
         super(FabricBlockSettings.of(Material.STONE).strength(1.0f).requiresTool());
     }
 
-    public PlayerEntity getBoundPlayer() {
-        return this.boundPlayer;
-    }
-
-    public void onTeleport(BlockPos pos, World world){
-        world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.AMBIENT, 2.0f, 0.75f, true);
+    public void onTeleport(BlockPos pos, World world) {
+        world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.AMBIENT,
+                2.0f, 0.75f, true);
     }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
             BlockHitResult hit) {
         if (!world.isClient) {
-            if (this.boundPlayer == null) {
-                ((EntityExt) player).UpdateAnchor(pos);
-                boundPlayer = player;
-            } else if (!this.boundPlayer.equals(player)) {
-                player.sendMessage(Text.of("Already bound to another player"), true);
-                return ActionResult.FAIL;
-            }
+            ((EntityExt) player).UpdateAnchor(pos);
         }
 
         return ActionResult.SUCCESS;
