@@ -8,6 +8,7 @@
 		"3": "homeward:block/bonfire_sword_hilt_sm",
 		"4": "homeward:block/bonfire_sword_grip",
 		"5": "homeward:block/bonfire_sword_pommel",
+		"6": "homeward:block/campfire_fire",
 		"particle": "homeward:block/campfire_log_lit"
 	},
 	"elements": [
@@ -172,6 +173,35 @@
 				"up": {"uv": [0, 5, 16, 16], "rotation": 180, "texture": "#0"},
 				"down": {"uv": [0, 15, 16, 16], "rotation": 180, "texture": "#0"}
 			}
+		},
+		{
+			"name": "fire",
+			"from": [-6.25, 1, 11.25],
+			"to": [6.25, 10, 11.25],
+			"rotation": {"angle": 45, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#6"},
+				"east": {"uv": [0, 0, 0, 16], "texture": "#missing"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#6"},
+				"west": {"uv": [0, 0, 0, 16], "texture": "#missing"},
+				"up": {"uv": [0, 0, 16, 0], "texture": "#missing"},
+				"down": {"uv": [0, 0, 16, 0], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "fire",
+			"from": [0, 1, 5],
+			"to": [0, 10, 17.5],
+			"rotation": {"angle": 45, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 16], "texture": "#missing"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#6"},
+				"south": {"uv": [0, 0, 0, 16], "texture": "#missing"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#6"},
+				"up": {"uv": [0, 0, 16, 0], "rotation": 270, "texture": "#missing"},
+				"down": {"uv": [0, 0, 16, 0], "rotation": 90, "texture": "#missing"}
+			}
 		}
-	]
+	],
+	"display": {}
 }

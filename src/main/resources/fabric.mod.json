@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "net.fabricmc.amar.Homeward"
+    ],
+    "client": [
+      "net.fabricmc.amar.HomewardClientMod"
     ]
   },
   "mixins": [
