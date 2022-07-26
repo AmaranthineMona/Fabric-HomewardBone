@@ -43,6 +43,7 @@ public class HomeAnchor extends Block {
             BlockHitResult hit) {
         if (!world.isClient) {
             ((EntityExt) player).UpdateAnchor(pos);
+            player.sendMessage(Text.of("Bonfire location updated"), true);
         }
 
         return ActionResult.SUCCESS;
@@ -66,10 +67,9 @@ public class HomeAnchor extends Block {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        var BASE_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
-        var X_STEM_SHAPE = Block.createCuboidShape(4.0D, 0.0D, 5.0D, 8.0D, 16.0D, 10.0D);
-        var X_AXIS_SHAPE = VoxelShapes.union(BASE_SHAPE, new VoxelShape[] { X_STEM_SHAPE });
-        return X_AXIS_SHAPE;
+        var bonfire_base = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 7.0D, 16.0D);
+        var bonFire_Sword = Block.createCuboidShape(5.0D, 0.0D, 7.5D, 11.0D, 20.0D, 8.5D);
+        return VoxelShapes.union(bonfire_base, new VoxelShape[] { bonFire_Sword });
     }
 
     @Override
