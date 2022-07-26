@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-      "layer0": "homeward:item/home_anchor"
+      "layer0": "homeward:item/bonfire"
   }
 }

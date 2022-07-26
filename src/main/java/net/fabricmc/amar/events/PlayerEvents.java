@@ -1,6 +1,6 @@
 package net.fabricmc.amar.events;
 
-import net.fabricmc.amar.EntityExt;
+import net.fabricmc.amar.util.EntityExt;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
 

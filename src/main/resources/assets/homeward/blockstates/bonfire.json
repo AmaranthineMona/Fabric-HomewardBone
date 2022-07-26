@@ -1,7 +1,7 @@
 {
     "variants": {
         "": {
-            "model": "homeward:block/home_anchor"
+            "model": "homeward:block/bonfire"
         }
     }
 }

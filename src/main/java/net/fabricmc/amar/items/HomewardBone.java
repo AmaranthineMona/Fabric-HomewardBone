@@ -2,8 +2,8 @@ package net.fabricmc.amar.items;
 
 import java.util.List;
 
-import net.fabricmc.amar.EntityExt;
-import net.fabricmc.amar.HomeAnchor;
+import net.fabricmc.amar.blocks.Bonfire;
+import net.fabricmc.amar.util.EntityExt;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -68,13 +68,13 @@ public class HomewardBone extends Item {
 
         var block = world.getBlockState(anchorPos).getBlock();
 
-        return block instanceof HomeAnchor;
+        return block instanceof Bonfire;
     }
 
     private void TeleportPlayer(World world, LivingEntity player, Hand hand) {
         if (!world.isClient) {
             var anchorPos = ((EntityExt) player).GetHomeAnchorPos();
-            var homeAnchor = (HomeAnchor) world.getBlockState(anchorPos).getBlock();
+            var homeAnchor = (Bonfire) world.getBlockState(anchorPos).getBlock();
             ((ServerPlayerEntity) player).networkHandler.requestTeleport(anchorPos.getX(), anchorPos.getY(),
                     anchorPos.getZ(), player.getYaw(), player.getPitch());
 

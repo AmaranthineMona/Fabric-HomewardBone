@@ -1,7 +1,8 @@
-package net.fabricmc.amar;
+package net.fabricmc.amar.blocks;
 
 import java.util.Random;
 
+import net.fabricmc.amar.util.EntityExt;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -24,12 +25,12 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
-public class HomeAnchor extends Block {
-    public HomeAnchor(Settings settings) {
+public class Bonfire extends Block {
+    public Bonfire(Settings settings) {
         super(settings);
     }
 
-    public HomeAnchor() {
+    public Bonfire() {
         super(FabricBlockSettings.of(Material.STONE).strength(1.0f).requiresTool().nonOpaque());
     };
 

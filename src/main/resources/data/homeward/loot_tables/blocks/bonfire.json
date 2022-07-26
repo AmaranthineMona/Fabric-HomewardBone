@@ -6,7 +6,7 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "homeward:home_anchor"
+                    "name": "homeward:bonfire"
                 }
             ],
             "conditions": [
