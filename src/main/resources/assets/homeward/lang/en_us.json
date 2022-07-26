@@ -1,0 +1,12 @@
+{
+    "gameplay.homeward.bonfire_updated": "Bonfire location updated",
+    "gameplay.homeward.invalid_bonfire_location": "Can only be placed in the overworld",
+    "gameplay.homeward.bonfire_wrong_dimension": "Bonfire is in another dimension",
+    "gameplay.homeward.bonfire_not_found": "Bonfire was broken or blocked",
+    "gameplay.homeward.homeward_bone_tooltip": "Use to return back to the last bonfire you rested at",
+    "item.homeward.homeward_bone": "Homeward Bone",
+    "item.homeward.soul_essence": "Soul Essence",
+    "item.homeward.bonfire_charm": "Bonfire Charm",
+    "item.homeward.bonfire": "Bonfire",
+    "block.homeward.bonfire": "Bonfire"
+}

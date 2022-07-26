@@ -15,6 +15,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -44,7 +45,7 @@ public class Bonfire extends Block {
             BlockHitResult hit) {
         if (!world.isClient) {
             ((EntityExt) player).UpdateAnchor(pos);
-            player.sendMessage(Text.of("Bonfire location updated"), true);
+            player.sendMessage(new TranslatableText("gameplay.homeward.bonfire_updated"), true);
         }
 
         return ActionResult.SUCCESS;
@@ -56,14 +57,10 @@ public class Bonfire extends Block {
             if (world.getRegistryKey().getValue().equals(DimensionType.OVERWORLD_ID)) {
                 super.onPlaced(world, pos, state, player, itemStack);
             } else {
-                sendMessage(player, "Can only be placed in the overworld");
+                ((PlayerEntity) player).sendMessage(new TranslatableText("gameplay.homeward.invalid_bonfire_location"), true);
                 world.breakBlock(pos, player.canTakeDamage(), player, 2);
             }
         }
-    }
-
-    private void sendMessage(LivingEntity player, String text) {
-        player.sendSystemMessage(Text.of(text), player.getUuid());
     }
 
     @Override

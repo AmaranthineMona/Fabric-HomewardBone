@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
@@ -42,12 +43,12 @@ public class HomewardBone extends Item {
 
         if (!this.isInOverworld(world)) {
             player.stopUsingItem();
-            player.sendMessage(Text.of("Home anchor is in another dimension"), true);
+            player.sendMessage(new TranslatableText("gameplay.homeward.bonfire_wrong_dimension"), true);
 
             return TypedActionResult.fail(player.getStackInHand(hand));
         } else if (!this.IsHomeAnchorAvailable(world, player)) {
             player.stopUsingItem();
-            player.sendMessage(Text.of("Home anchor was broken or blocked"), true);
+            player.sendMessage(new TranslatableText("gameplay.homeward.bonfire_not_found"), true);
 
             return TypedActionResult.fail(player.getStackInHand(hand));
         } else {
@@ -85,7 +86,7 @@ public class HomewardBone extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.of("Use to return back to your attuned home anchor."));
+        tooltip.add(new TranslatableText("gameplay.homeward.homeward_bone_tooltip"));
     }
 
     @Override
