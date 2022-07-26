@@ -8,6 +8,9 @@
   "client": [
     "EntityMixin"
   ],
+  "server": [
+    "EntityMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

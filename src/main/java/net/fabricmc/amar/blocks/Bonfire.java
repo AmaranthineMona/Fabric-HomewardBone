@@ -32,7 +32,7 @@ public class Bonfire extends Block {
     }
 
     public Bonfire() {
-        super(FabricBlockSettings.of(Material.STONE).strength(1.0f).requiresTool().nonOpaque());
+        super(FabricBlockSettings.of(Material.STONE).strength(1.0f).requiresTool().nonOpaque().luminance(12));
     };
 
     public void onTeleport(BlockPos pos, World world) {
