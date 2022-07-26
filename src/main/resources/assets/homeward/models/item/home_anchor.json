@@ -1,3 +1,6 @@
 {
-  "parent": "homeward:block/home_anchor"
+  "parent": "item/generated",
+  "textures": {
+      "layer0": "homeward:item/home_anchor"
+  }
 }
