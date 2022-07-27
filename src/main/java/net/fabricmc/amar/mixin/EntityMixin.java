@@ -16,7 +16,11 @@ public abstract class EntityMixin implements EntityExt {
     private int[] blockPos;
 
     public void UpdateAnchor(BlockPos anchorPos) {
-        this.blockPos = new int[] { anchorPos.getX(), anchorPos.getY(), anchorPos.getZ() };
+        if (anchorPos != null) {
+            this.blockPos = new int[] { anchorPos.getX(), anchorPos.getY(), anchorPos.getZ() };
+        } else {
+            this.blockPos = null;
+        }
     }
 
     public BlockPos GetHomeAnchorPos() {
