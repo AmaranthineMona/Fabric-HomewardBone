@@ -32,7 +32,7 @@ public class HomewardBone extends Item {
 
     public HomewardBone() {
         super(new FabricItemSettings()
-                .group(ItemGroup.BREWING)
+                .group(ItemGroup.TRANSPORTATION)
                 .maxCount(16)
                 .food(new FoodComponent.Builder().hunger(0).saturationModifier(0).snack().alwaysEdible().build()));
     }
