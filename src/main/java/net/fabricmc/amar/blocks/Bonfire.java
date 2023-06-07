@@ -1,7 +1,5 @@
 package net.fabricmc.amar.blocks;
 
-import java.util.Random;
-
 import net.fabricmc.amar.util.EntityExt;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -15,16 +13,16 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.dimension.DimensionTypes;
 
 public class Bonfire extends Block {
     public Bonfire(Settings settings) {
@@ -45,7 +43,7 @@ public class Bonfire extends Block {
             BlockHitResult hit) {
         if (!world.isClient) {
             ((EntityExt) player).UpdateAnchor(pos);
-            player.sendMessage(new TranslatableText("gameplay.homeward.bonfire_updated"), true);
+            player.sendMessage(Text.translatable("gameplay.homeward.bonfire_updated"), true);
         }
 
         return ActionResult.SUCCESS;
@@ -54,10 +52,10 @@ public class Bonfire extends Block {
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity player, ItemStack itemStack) {
         if (!world.isClient) {
-            if (world.getRegistryKey().getValue().equals(DimensionType.OVERWORLD_ID)) {
+            if (world.getRegistryKey().getValue().equals(DimensionTypes.OVERWORLD_ID)) {
                 super.onPlaced(world, pos, state, player, itemStack);
             } else {
-                ((PlayerEntity) player).sendMessage(new TranslatableText("gameplay.homeward.invalid_bonfire_location"), true);
+                ((PlayerEntity) player).sendMessage(Text.translatable("gameplay.homeward.invalid_bonfire_location"), true);
                 world.breakBlock(pos, player.canTakeDamage(), player, 2);
             }
         }
