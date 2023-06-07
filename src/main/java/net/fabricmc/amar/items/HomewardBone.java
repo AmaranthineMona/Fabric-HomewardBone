@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
@@ -25,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.dimension.DimensionTypes;
 
 public class HomewardBone extends Item {
     final double PLAYER_BLOCK_OFFSET = 0.5D;
@@ -50,12 +49,12 @@ public class HomewardBone extends Item {
 
         if (!this.isInOverworld(world)) {
             player.stopUsingItem();
-            player.sendMessage(new TranslatableText("gameplay.homeward.bonfire_wrong_dimension"), true);
+            player.sendMessage(Text.translatable("gameplay.homeward.bonfire_wrong_dimension"), true);
 
             return TypedActionResult.fail(player.getStackInHand(hand));
         } else if (!this.IsHomeAnchorAvailable(world, player)) {
             player.stopUsingItem();
-            player.sendMessage(new TranslatableText("gameplay.homeward.bonfire_not_found"), true);
+            player.sendMessage(Text.translatable("gameplay.homeward.bonfire_not_found"), true);
 
             return TypedActionResult.fail(player.getStackInHand(hand));
         } else {
@@ -66,7 +65,7 @@ public class HomewardBone extends Item {
     }
 
     private boolean isInOverworld(World world) {
-        return world.getRegistryKey().getValue().equals(DimensionType.OVERWORLD_ID);
+        return world.getRegistryKey().getValue().equals(DimensionTypes.OVERWORLD_ID);
     }
 
     private boolean IsHomeAnchorAvailable(World world, PlayerEntity player) {
@@ -162,14 +161,14 @@ public class HomewardBone extends Item {
                 homeAnchor.onTeleport(anchorPos, world);
                 player.getStackInHand(hand).decrement(1);
             } else {
-                ((PlayerEntity) player).sendMessage(new TranslatableText("gameplay.homeward.bonfire_blocked"), true);
+                ((PlayerEntity) player).sendMessage(Text.translatable("gameplay.homeward.bonfire_blocked"), true);
             }
         }
     }
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(new TranslatableText("gameplay.homeward.homeward_bone_tooltip"));
+        tooltip.add(Text.translatable("gameplay.homeward.homeward_bone_tooltip"));
     }
 
     @Override
